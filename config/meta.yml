@@ -1,0 +1,5 @@
+meta_product_name: "Hellotenor"
+meta_title: "Hellotenor - All your legal needs in an instant"
+meta_description: "Manage legal cases in just a few clicks and make changes in real time. Hellotenor is here to automate the lawyer workflow."
+meta_image: "cover.jpg" # should exist in `app/assets/images/`
+twitter_account: "@hello_tenor"   # required for Twitter Cards

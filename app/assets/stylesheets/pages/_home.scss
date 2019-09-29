@@ -1,0 +1,128 @@
+// Specific CSS for your home-page
+
+@media (max-width: 991px) {
+  .mt-4 {
+    display: none;
+  }
+  .home-cta {
+    display: block;
+    margin: 0 auto;
+  }
+  .features-responsive {
+    justify-content: center !important;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}
+@media (max-width: 767px) {
+  .features-responsive img  {
+  order: -1
+  }
+}
+
+.bg-blue {
+  background: #4B81EB;
+  color: #fafafa;
+  height: calc(80vh - 45px);
+}
+
+.header-contact{
+  p{
+    position: absolute;
+    right: 21px;
+    top: 12px;
+    font-size: .875rem;
+  }
+  height: 45px;
+}
+
+h1 {
+    font-size: 40px;
+    line-height: 48px;
+    font-weight: 700;
+    display: block;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.home-banner h4 {
+    font-size: 21px;
+    line-height: 31px;
+    font-weight: 300;
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.home-menu-item{
+  color: #fff !important;
+}
+
+.home-cta {
+  color: #0f6fde !important;
+  background-color: #fff !important;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  padding: 15px 20px;
+  border-radius: 4px;
+}
+
+.blue-btn{
+  background-color: #4B81EB !important;
+  color: #fff !important;
+}
+
+.bg-blue{
+  .btn-primary{
+    background-color: #4B81EB;
+    border-color: #4B81EB !important;
+  }
+  .btn-primary:hover {
+    background-color: white;
+    border-color: white;
+    color: rgb(34, 34, 34);
+  }
+  .btn-outline-secondary{
+  color: white;
+  border-color: white;
+  }
+}
+
+
+.card-product {
+  height: 120px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+}
+
+.card-product p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-product .card-product-infos {
+  padding: 16px;
+}
+
+.card-space {
+  background-color: #4B81EB;
+  color: white;
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  -webkit-box-shadow: 10px 13px 26px 0px rgba(184,184,184,1);
+  -moz-box-shadow: 10px 13px 26px 0px rgba(184,184,184,1);
+  box-shadow: 10px 13px 26px 0px rgba(184,184,184,1);
+  border-radius: 10px;
+}

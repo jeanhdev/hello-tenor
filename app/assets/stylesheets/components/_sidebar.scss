@@ -1,0 +1,55 @@
+.wrapper {
+    display: flex;
+}
+
+.nav-item{
+  width: 210px;
+  padding: 10px 30px;
+}
+
+
+.col-sidebar {
+  position: sticky;
+  top: 0;
+  flex: 0 0 270px;
+  padding: 10px 10px 0 10px;
+  background-color: #1A2744;
+  z-index: 1;
+  height: 100vh;
+
+  .active {
+    background-color: #F2F4FB;
+    border-radius: 20px 0 0 20px;
+    a {
+      color : #5782E4 !important;
+    }
+  }
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+}
+
+#sidebar li {
+  margin: 8px 0;
+  i {
+    color: grey;
+  }
+}
+
+.btn-outine-logout{
+  background-color: white;
+}
+
+
+.sections a {
+  color: white;
+  text-decoration: none;
+}
+
+.icon{
+  .fas {
+    color:white;
+  }
+}

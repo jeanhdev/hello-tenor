@@ -1,0 +1,79 @@
+<div class="wrapper">
+
+  <%= render 'shared/sidebar' %>
+
+  <div class="container-fluid custom-container">
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box mt-5 mb-3">
+          <h4 class="page-title">Mes Clients </h4>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card card-cases mb-3">
+          <div class="card-body">
+
+      <table class="dtBasicSort table table-striped" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <!--<th scope="col">#</th>-->
+              <th class="th-sm">Société</th>
+              <th class="th-sm">Contact</th>
+              <th class="th-sm">Téléphone</th>
+              <th class="th-sm">Email</th>
+              <!--<th class="th-sm">Nbr. aff.</th>
+              <th class="th-sm">Revenus</th>-->
+              <th class="th-sm">Adresse</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--<% count = 1 %>-->
+            <% @clients.each do |client| %>
+            <tr>
+              <!--<th><%= count %></th>-->
+              <td> <%= client.business.name %> </td>
+              <td> <%= client.first_name %> <%= client.last_name %> </td>
+              <td> <%= client.business.phone %>
+              <td> <%= mail_to client.email %> </td>
+              <td> <%= client.business.address %> </td>
+              <!--<td> <%= @cases.where(user: client).count %> </td>
+              <td>
+                <% sum = 0 %>
+                <% @cases.where(user: client).each do |c| %>
+                  <% sum += c.fees.to_f.round %>
+                <% end %>
+                <% number_with_delimiter(sum.round, delimiter: " ") %> €
+              </td>-->
+            </tr>
+          <% count += 1 %>
+          <% end %>
+          <%if @clients.size == 0 %>
+          <tr><td colspan="5">
+              <p>Aucun résultat disponible<p>
+          </td></tr>
+          <%end%>
+          </tbody>
+
+
+          <!--<tfoot>
+            <tr>
+              <th>#</th>
+              <th>Société</th>
+              <th>Client</th>
+              <th>Email</th>
+              <th>Adresse</th>
+              <th>Nbr. aff.</th>
+              <th>Revenus</th>
+            </tr>
+          </tfoot>-->
+        </table>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
+

@@ -1,0 +1,54 @@
+<div class="wrapper">
+
+  <%= render 'shared/sidebar' %>
+
+  <div class="container-fluid custom-container">
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box mt-5 mb-3">
+          <h4 class="page-title">Mes Factures </h4>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card card-cases mb-3">
+          <div class="card-body">
+
+      <table class="dtBasicSort table table-striped" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <!--<th scope="col">#</th>-->
+              <th class="th-sm">Références</th>
+              <th class="th-sm">Affaires</th>
+              <th class="th-sm">Clients</th>
+              <th class="th-sm">Montants</th>
+              <th class="th-sm">Dates</th>
+              <th class="th-sm" style="text-align: center;">Télécharger</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <!--<% count = 1 %>-->
+            <% @invoices.each do |invoice| %>
+              <tr>
+                <!--<th><%= count %></th>-->
+                <td> <%= invoice.case.case_number %> </td>
+                <td> <%= link_to invoice.case.title, case_path(invoice.case) %> </td>
+                <td> <%= invoice.case.user.business.name %> </td>
+                <td> <%= number_with_delimiter(invoice.total_amount, delimiter: " ") %> €</td>
+                <td> <%= invoice.created_at.strftime("%d-%m-%Y") %> </td>
+                <td style="text-align: center;"> <%= link_to case_invoice_path(invoice.case)do%><%= image_tag("download-icon.svg", width: "20") %><% end %></td>
+                <!--<% count += 1 %>-->
+              </tr>
+            <%end%>
+          </tbody>
+        </table>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
+

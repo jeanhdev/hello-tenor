@@ -1,0 +1,23 @@
+
+<div class="form-group">
+    <%= simple_form_for(@procedure) do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <div class="form-inputs">
+        <%= f.input :name %>
+        <%= f.input :legal_action, collection: Procedure::PROCEDURE_LEGAL_ACTION %>
+        <%= f.input :grievance %>
+        <%= f.input :start_date %>
+        <%= f.input :end_date %>
+        <%= f.input :deadline, as: :date, html5: true %>
+        <%= f.input :cost %>
+        <%= f.input :status, collection: Procedure::PROCEDURE_STATUS %>
+      </div>
+  
+      <div class="form-actions">
+        <%= f.button :submit, class: "btn btn-primary" %>
+        <%= link_to 'Back', case_procedures(@case), class: "btn btn-light" %>
+      </div>
+    <% end %>
+  </div>
+  

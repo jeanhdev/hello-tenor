@@ -1,0 +1,25 @@
+
+<div class='container'>
+    <h1>Procédure de <%= @case.title %></h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Numéro</th>
+          <th scope="col">Affaire</th>
+          <th scope="col">Status</th>
+          <th scope="col">Client</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @procedures.each do |p| %>
+          <tr>
+
+            <td><%= p.name %></td>
+            <td><%= p.status %></td>
+            <td><%= p.case.user.first_name %> <%= p.case.user.last_name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>

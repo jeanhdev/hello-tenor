@@ -1,0 +1,13 @@
+function updateDocuments() {
+  const documents = document.getElementById('documents-<%= @category %>');
+
+  <% if %w(letters pieces).include?(@category) %>
+    const outerHTML = '<%= j render "cases/documents", documents: @documents, category: @category %>'
+  <% else %>
+    const outerHTML = '<%= j render "cases/conclusions", documents: @documents, category: @category %>'
+  <% end %>
+
+  documents.outerHTML = outerHTML;
+}
+
+updateDocuments();

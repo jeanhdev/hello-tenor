@@ -1,0 +1,95 @@
+
+
+h4 {
+  font-weight: 500;
+}
+
+.col-xl-12{
+  padding: 0;
+}
+
+.page-title-box {
+  margin-top: 22px;
+  box-sizing: border-box;
+  font-size: 1.25rem;
+  margin: 0;
+  line-height: 75px;
+  color: #323a46;
+}
+
+.card-cases {
+  box-shadow: 0 .01rem 0.5rem lightgray;
+}
+
+.card-body{
+  flex: 1 1 auto;
+  padding: 1.5rem;
+}
+
+.mb-2 {
+  margin-bottom: .75rem !important;
+}
+
+.page-title-right{
+    position: absolute;
+    bottom: 30px;
+    .btn{
+      border: none;
+    }
+  }
+
+#query {
+  width: 400px;
+}
+
+.modal-content{
+  border-radius: 5px;
+  h6{
+    color: #167ffb;
+    text-align: justify;
+  }
+}
+
+.modal-dialog {
+    margin-top: 130px;
+}
+
+.modal-header {
+    justify-content: center;
+    position: relative;
+}
+
+.close:hover {
+
+    color: #fff;
+    transform: rotate(90deg);
+    transition: all 0.3s ease-in;
+
+}
+
+.modal-xl {
+    max-width: 800px;
+}
+
+.modal-lg {
+    max-width: 700px;
+}
+
+.modal .form-group {
+  width: 80%;
+}
+
+.modal .form-group-brief {
+  width: 80%;
+}
+
+.modal .form-inputs .form-group {
+  width: 100%;
+}
+
+.btn-cancel {
+    color: #212529;
+    background-color: #fff0;
+    border: none;
+    border-radius: none;
+}

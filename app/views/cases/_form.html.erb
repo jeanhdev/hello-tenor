@@ -1,0 +1,20 @@
+        <!-- Your form content -->
+<%= simple_form_for(@case) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <h3>Brief Client : </h3>
+    <%= f.input :title, label: "Nom de l'affaire" %>
+    <%= f.input :start_date, label: "Dâte du litige" %>
+    <%= f.input :practice_area, label: "Lieu de la juridiction" %>
+    <%= f.input :description, label: "Brief du client" %>
+    <h3>Prix </h3>
+    <%= f.input :fees, label: "Estimation de facturation" %>
+  </div>
+
+  <div class="form-actions">
+    <%= link_to 'Annuler', cases_path, class: "btn btn-cancel" %>
+    <%= f.button :submit , "Valider", class: "btn btn-primary"%>
+  </div>
+<% end %>

@@ -1,0 +1,67 @@
+
+  <div class="wrapper">
+      <%= render 'shared/sidebar' %>
+    <% sum = 0 %>
+    <% @cases.each do |c| %>
+      <% sum += c.fees.to_f %>
+    <% end %>
+    <div class="custom-container summary">
+      <div class="mt-5 mb-3">
+        <p>Bienvenue <strong>Maître <%= current_user.last_name %></strong>, </p>
+        <h4> Tableau de bord <strong><%= current_user.lawyer.law_firm.name %></strong></h4>
+      </div>
+      <div class="custom-container-1">
+        <div class="card text-center">
+          <div class="card-body">
+            <div class="d-flex flex-row align-items-center justify-content-center mb-2"><%= image_tag("analytics.svg", height: "40", class: "mr-2") %><h6 class="card-title mb-3 h6-summary">CA <%= Date.today.strftime("%Y") %></h6></div>
+            <h3 class="card-text money"><span id="counter-target" data-number="<%= sum.round %>"></span> €</h3>
+          </div>
+        </div>
+        <div class="card text-center">
+          <div class="card-body">
+            <div class="d-flex flex-row align-items-center justify-content-center mb-2"><%= image_tag("en-cours.svg", height: "40", class: "mr-2") %><h6 class="card-title mb-3 h6-summary">Affaires en cours</h6></div>
+            <h3 class="card-text"><%= (@cases.select { |c| c.status == 'En cours'}.count) %></h3>
+          </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-body">
+              <div class="d-flex flex-row align-items-center justify-content-center mb-2"><%= image_tag("done.svg", height: "40", class: "mr-2") %><h6 class="card-title mb-3 h6-summary">Affaires terminées</h6></div>
+              <h3 class="card-text"><%= (@cases.select { |c| c.status == 'Terminé'}.count) %></h3>
+            </div>
+        </div>
+      </div>
+
+    <div class="custom-container-2">
+      <div class="card">
+        <div class="card-body scrollable-card justify-text" style="padding-bottom: 0px;">
+            <h6 class="btn btn-light" style="color:black; border: none; background: none;">
+              Notifications<span class="badge badge-danger ml-2"><%= @notifications.where(read: false).count %></span>
+            </h6>
+          <hr>
+            <% @notifications.each do |notif| %>
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <%= cl_image_tag(notif.receiver.business.logo, class: "rounded-circle mr-2", width: "20", height: "20") %>
+                  <strong> <%= notif.receiver.business.name %> </strong> (action de <%= notif.receiver.first_name %> <%= notif.receiver.last_name %>)
+                </div>
+
+                <% if notif.read %>
+                  <span class="badge badge-success">Mis à jour</span>
+                <% else %>
+                  <span class="badge badge-secondary">Non lu</span>
+                <% end %>
+              </div>
+              <div>
+                <%= notif.content %>
+              </div>
+            <hr>
+            <% end %>
+        </div>
+      </div>
+    </div>
+      <div class="mt-3" id="date-summary">
+        <small>Date du jour : <%= Date.today.strftime("%d/%m/%Y") %></small>
+      </div>
+  </div>
+  </div>
+  </div>

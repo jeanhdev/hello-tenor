@@ -1,0 +1,18 @@
+{
+  "name": "rails-hellotenor",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "^4.0.7",
+    "aos": "^2.3.4",
+    "bootstrap": "^4.3.1",
+    "countup.js": "^2.0.4",
+    "datatables.net-dt": "^1.10.19",
+    "jquery": "^3.4.1",
+    "mdbootstrap": "^4.8.8",
+    "places.js": "^1.16.4",
+    "popper.js": "^1.15.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.8.0"
+  }
+}

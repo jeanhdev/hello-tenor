@@ -1,0 +1,17 @@
+<div class="container">
+
+  <h2>Documents de l'affaire <%= @case.title %> </h2>
+
+  <% @documents.each do |document| %>
+  <ul>
+  <li><%= link_to document.name, document.storage_url %>
+    <%= document.category %>
+    <%= link_to "Supprimer", document_path(document), method: :delete, data: {confirm: "Etes vous sur de vouloir supprimer #{document.name}?"} %>
+  </li>
+
+  </ul>
+  <% end %>
+
+  <%= link_to "Ajouter un document", new_case_document_path, class: "btn btn-primary" %>
+
+</div>

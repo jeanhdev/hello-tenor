@@ -1,0 +1,157 @@
+
+
+<div class="container">
+  <div class="d-flex justify-content-end">
+<% unless @format == :pdf %>
+  <%= link_to 'Retour', case_path(@case), class: "btn btn-secondary btn-marge" %>
+  <%= link_to 'Télécharger (.pdf)', case_invoice_path(@case, format: :pdf), target: '_blank', class: "btn btn-secondary btn-marge" %>
+  <%= mail_to @case.user.email, "Envoyer par email", class: "btn btn-primary btn-marge" %>
+<% end %>
+</div>
+<div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+          <tr class="top">
+            <td colspan="4">
+              <table>
+                <tr>
+                  <td class="title">
+                    <%#= image_tag wicked_pdf_asset_base64('company_logo.png') %>
+                    <%#= cl_image_tag @case.lawyer.law_firm.logo, height: 150, width: 200 %>
+                    <%= wicked_pdf_image_tag @case.lawyer.law_firm.logo, height: 150, width: 200 %>
+                  </td>
+
+                  <td class="right">
+                    Facture #: <b><%= @case.invoice.id %></b>
+                    <br>
+                    Créé le: <b><%= @case.invoice.created_at.strftime('%d/%m/%Y') %></b>
+                    <br>
+                    Dû le: <b><%= (@case.invoice.created_at + 1.month).strftime('%d/%m/%Y') %></b>
+                    <br>
+                    <!-- Statut: <span class="<%#= @case.invoice.status_class %>"><%#= @case.invoice.status %></span> -->
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+           <tr class="information">
+            <td colspan="4">
+              <table>
+                <tr>
+                  <td>
+                    <b>Maître <%= @case.lawyer.user.first_name %> <%= @case.lawyer.user.last_name %></b><br>
+                    <%= @case.lawyer.law_firm.name %><br>
+                    <%= @case.lawyer.law_firm.address %><br>
+                    <%= @case.lawyer.law_firm.city %><br>
+                    <i class="far fa-envelope"></i> <%= @case.lawyer.user.email %><br>
+                    <i class="fas fa-phone"></i> <%= @case.lawyer.law_firm.phone %>
+                  </td>
+
+                  <td>
+                    <b><%= @case.user.business.name %></b><br>
+                    <%= @case.user.first_name%> <%= @case.user.last_name%><br>
+                    <%= @case.user.business.address %><br>
+                    <i class="far fa-envelope"></i> <%= @case.user.email %><br>
+                    <i class="fas fa-phone"></i> <%= @case.user.business.phone %>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- <tr class="heading">
+            <td>Payment Method</td>
+            <td colspan="2"></td>
+            <td class="right">Cache</td>
+          </tr>
+
+          <tr class="details">
+            <td>Delivery Method</td>
+            <td colspan="2"></td>
+            <td class="right">1000</td>
+          </tr> -->
+
+          <tr class="heading">
+            <td>Prestations</td>
+            <td></td>
+            <td></td>
+            <td class="right">Montant</td>
+            <!-- <td class="right">Qty</td> -->
+            <!-- <td>Total</td> -->
+          </tr>
+
+          <% @case.procedures.each do |procedure| %>
+            <tr class="item">
+                <td>
+                    <%= procedure.name %><br>
+                    <small><%= procedure.legal_action %></small>
+                </td>
+
+                <td></td>
+                <td></td>
+
+                <td class="right">
+                    <%= procedure.cost %> €
+                </td>
+
+                <!-- <td class="right">
+                    x <%#= invoice_item.qty %>
+                </td> -->
+
+                <td>
+                    <%#= number_to_currency(invoice_item.price * invoice_item.qty) %>
+                </td>
+            </tr>
+
+          <% end %>
+            <tr class="item">
+                <td>
+                    Honoraires<br>
+                    <small>  Honoraires de base et Honoraires de résultat</small>
+                </td>
+
+                <td></td>
+                <td></td>
+
+                <td class="right">
+                    <%= number_with_delimiter(@case.fees,delimiter: " ") %> €
+                </td>
+
+                <!-- <td class="right">
+                    x <%#= invoice_item.qty %>
+                </td> -->
+
+                <td>
+                    <%#= number_to_currency(invoice_item.price * invoice_item.qty) %>
+                </td>
+            </tr>
+
+
+          <tr>
+            <td colspan="4"></td>
+          </tr>
+
+          <tr>
+            <td colspan="2"></td>
+            <td><b>Sous-total</b></td>
+            <td class="tabdroite"><%=number_with_delimiter(@case.invoice.subtotal,delimiter: " ")%> €</td>
+          </tr>
+
+          <tr>
+            <td colspan="2"></td>
+            <td><b>TVA (<%= @case.invoice.vat %>%)</b></td>
+            <td class="tabdroite">+ <%=number_with_delimiter(@case.invoice.vat_subtotal,delimiter: " ")%> €</td>
+          </tr>
+
+          <tr class="heading">
+            <td colspan="2"></td>
+            <td><b>MONTANT TOTAL:</b></td>
+            <td class="tabdroite">
+               <b><%=number_with_delimiter(@case.invoice.total_amount,delimiter: " ")%> €</b>
+            </td>
+          </tr>
+        </table>
+    </div>
+</div>
+
+

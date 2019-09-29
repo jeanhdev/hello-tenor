@@ -1,0 +1,37 @@
+<!-- Sidebar -->
+  <div class="col-sidebar">
+    <nav id="sidebar">
+      <div class="hellotenor-logo d-flex justify-content-center">
+        <%= link_to root_path do %>
+          <%= image_tag("sidebar-icon.svg", class: "mt-5 mb-2", width: "150") %>
+        <%end%>
+      </div>
+      <!-- <div class="sidebar-profile d-flex flex-column align-items-center">
+        <%= image_tag("vatine.png", class: "rounded-circle mt-3 mb-2", width:
+        "80", height: "80") %>
+        <p><strong>Maître <%= current_user.last_name %> </strong></p>
+      </div> -->
+      <ul class="list-unstyled sections d-flex flex-column" style="margin-left: 50px; margin-top: 70px; height: 65vh">
+        <li class= "nav-item nav-dashboard <%= 'active' if current_page?(summary_path) %>" >
+          <%= link_to "Tableau de bord", summary_path %>
+        </li>
+        <li class= "nav-item nav-cases <%= 'active' if current_page?(cases_path) || @active == true %>">
+          <%= link_to "Mes affaires", cases_path %>
+        </li>
+        <li class= "nav-item nav-clients <%= 'active' if current_page?(clients_path) %>">
+          <%= link_to "Mes clients", clients_path %>
+        </li>
+        <li class= "nav-item nav-invoices <%= 'active' if current_page?(invoices_path) %>">
+          <%= link_to "Mes factures", invoices_path %>
+        </li>
+      </ul>
+    </nav>
+    <div class="text-center icon" style="bottom: 0">
+        <!--<%= image_tag("vatine.png", class: "rounded-circle mt-3 mb-2", width:
+        "30", height: "30") %>-->
+      <%= link_to destroy_user_session_path, method: :delete do %>
+        <i class="fas fa-sign-out-alt"></i>
+      <% end %>
+    </div>
+  </div>
+

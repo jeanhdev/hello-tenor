@@ -1,0 +1,6 @@
+<div class="container col-6">
+    <h1>Ajoutez une procédure à <%= @case.title %></h1>
+    <br>
+    <p> <strong>(<%= @case.case_number %>)</strong></p>
+	<%= render 'form', procedure: @procedure %> 
+</div>

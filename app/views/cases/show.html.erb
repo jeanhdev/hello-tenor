@@ -1,0 +1,354 @@
+  <div class="wrapper">
+    <%= render 'shared/sidebar' %>
+    <div class="custom-container mt-5">
+    <% if @case.status == "En attente" %>
+      <div class="col-12 bg-white rounded py-3">
+        <h2 class="text-center mt-3 mb-4">Créer le brief client</h2>
+                <!-- Your form content -->
+        <%= simple_form_for(@case) do |f| %>
+          <%= f.error_notification %>
+          <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+          <div class="form-inputs">
+            <h3>Brief Client : </h3>
+            <%= f.input :start_date, label: "Dâte du litige",required:"true" %>
+            <%= f.input :practice_area, label: "Lieu de la juridiction",required:"true" %>
+            <%= f.input :description, label: "Brief du client",required:"true" %>
+            <h3>Prix </h3>
+            <%= f.input :fees, label: "Estimation de facturation",required:"true" %>
+          </div>
+
+          <div class="form-actions">
+            <%= link_to 'Annuler', cases_path, class: "btn btn-cancel" %>
+            <%= f.button :submit , 'Valider', class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    <!-- Client side -->
+    <% else %>
+      <div class="show">
+        <div class="d-flex justify-content-center mb-2">
+        <div style="border-bottom: 3px solid #5782E4; width: max-content;">
+          <h3 class="text-center case-tit"><%= @case.title %></h3>
+        </div>
+      </div>
+      <h6 class="mb-5 text-center">Affaire n° <%= @case.case_number %></h6>
+
+      <div class="d-flex justify-content-between">
+        <div class="card profile-card mr-3">
+          <div class="business-card d-flex flex-column align-items-center">
+              <%= cl_image_tag(@case.user.business.logo, class: "rounded-circle mt-4 mb-2", width: "80", height: "80") %>
+            <p style="color: white;"><strong> <%= @case.user.business.name %> </strong></p>
+          </div>
+          <div class="padding-card">
+          <hr style="margin-top: 0px;">
+            <div class="d-flex flex-row align-items-center mb-2"><%= image_tag("assistance.svg", height: "20", class: "mr-2") %><p style="margin-bottom: 0 !important;"><strong></strong><%= @case.user.first_name %> <%= @case.user.last_name %></p></div>
+            <div class="d-flex flex-row align-items-center mb-2"><%= image_tag("placeholder.svg", height: "20", class: "mr-2") %><p style="margin-bottom: 0 !important;"><%= @case.user.business.address %></p></div>
+            <div class="d-flex flex-row align-items-center mb-2"><%= image_tag("mail.svg", height: "20", class: "mr-2") %><p style="margin-bottom: 0 !important;"><%= mail_to @case.user.email %></p></div>
+            <div class="d-flex flex-row align-items-center mb-2"><%= image_tag("telephone.svg", height: "20", class: "mr-2") %><p style="margin-bottom: 0 !important;"><%= @case.user.business.phone %></p></div>
+          <hr>
+            <div class="d-flex flex-column justify-content-left">
+              <div>
+                <p><strong><i>Début de l'affaire</i></strong> : <%= @case.created_at.strftime("%d-%m-%Y") %></p>
+                <p><strong><i>Procédures engagées</i></strong> : <%= @case.procedures.count %></p>
+                <p><strong><i>Documents en ligne</i></strong> : <%= @case.documents.count %></p>
+                <p><strong><i>Montant de l'affaire</i></strong> : <%= number_with_delimiter(@case.fees.round, delimiter: " ") %> €</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Timeline-->
+        <div class="card timeline-card">
+          <div class="classic-tab">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item nav-item-show">
+                  <a class="nav-link nav-link-show active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Timeline</a>
+                </li>
+                <li class="nav-item nav-item-show">
+                  <a class="nav-link nav-link-show" id="pills-brief-tab" data-toggle="pill" href="#pills-brief" role="tab" aria-controls="pills-brief" aria-selected="false">Brief</a>
+                </li>
+              </ul>
+            <div class="tab-content rounded-bottom scrollable-card" id="pills-tabContent">
+
+              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="event-details">
+                  <% @case.events.order(created_at: :desc).each do |event| %>
+                    <div class="row text-timeline">
+                      <div class="event-date">
+                        <%= event.created_at.strftime("%d-%m-%Y") %>
+                      </div>
+                      <div class="event-description">
+                        <div class="d-flex align-items-center">
+                          <div class="cercle">
+                          </div>
+                          <h6><%= event.title %></h6>
+                        </div>
+                        <div class="paragraph-timeline">
+                          <!--<p style="padding-bottom: 0"> <%= event.description %>.</p>-->
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="pills-brief" role="tabpanel" aria-labelledby="pills-brief-tab">
+
+                  <div class="sidebar-brief d-flex flex-column align-items-center brief-details">
+                    <h5 style="margin-bottom: 0 !important;">
+                      <strong> <%= @case.title %> </strong>
+                      <button type="button" class="btn edit-btn" data-toggle="modal" data-target="#exampleModalScrollable" id="new-case-button">
+                        <i class="fas fa-pen"></i>
+                      </button>
+                    </h5>
+                    <p style="margin-bottom: 0 !important;"><small><%= @case.start_date %></small></p>
+                    <p style="margin-bottom: 0 !important;"><%= @case.practice_area %></p>
+            <!--        <span class="badge badge-success"style="margin-top: 10px; margin-bottom: 0 !important;"><%= @case.status %></span> -->
+                    <% if @case.status == 'En attente' %>
+                          <td><span class="badge badge-info" style="margin-top: 10px; margin-bottom: 0 !important;"><%= @case.status %></span></td>
+                        <% elsif @case.status == 'En cours' %>
+                          <td><span class="badge badge-secondary" style="margin-top: 10px; margin-bottom: 0 !important;"><%= @case.status %></span></td>
+                        <% elsif @case.status == 'Terminé' %>
+                          <td><span class="badge badge-success" style="margin-top: 10px; margin-bottom: 0 !important;"><%= @case.status %></span></td>
+                        <% elsif @case.status == 'Archivé' %>
+                          <td><span class="badge badge-dark" style="margin-top: 10px; margin-bottom: 0 !important;"><%= @case.status %></span></td>
+                        <% end %>
+                    <hr>
+                  </div>
+
+                  <div class="brief-details mr-3">
+                    <div class="d-flex flex-row align-items-center mb-2">
+                      <%= simple_format @case.description %>
+                    </div>
+                  </div>
+  <!--                 <div class="d-flex flex-row align-items-center mb-2"><%= @case.duration %></p></div>
+          -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end of timeline-->
+
+        <!--  edit modal for brief  -->
+        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Modifier le brief client</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+
+              <div class="modal-body d-flex justify-content-center">
+                <div class="form-group-brief">
+                  <%= render 'form', case: @case %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of edit modal for brief -->
+      </div>
+
+      <!--<div class="accordion" id="accordionExample">-->
+        <div class="mt-5">
+          <%= link_to new_case_document_path(@case) do%>
+            <button type="button" class="btn btn-blue">
+              <i class="fas fa-plus"></i>
+              Ajouter un document
+            </button>
+          <%end%>
+          <%= link_to new_case_notification_path(@case) do%>
+            <button type="button" class="btn btn-blue">
+              <i class="far fa-folder-open"></i>
+              Demander un document
+            </button>
+          <%end%>
+          <!-- BOUTON CREER UNE FACTURE  -->
+      <!-- <p><%= link_to 'Générer une facture', case_invoice_path(@case), method: :post, class: "btn btn-primary" %></p> -->
+      <!-- BOUTON CREER UNE FACTURE -->
+          <%= link_to case_invoice_path(@case), method: :post do%>
+            <button type="button" class="btn btn-blue">
+              <i class="far fa-file-alt"></i>
+              Générer une facture
+            </button>
+          <%end%>
+        </div>
+        <div class="mt-3">
+          <div class="card">
+            <div class="card-header" id="headingFive">
+              <h6 class="mt-3">Procédures en cours</h6>
+            </div>
+            <div id="collapseFive" class="collapse show" aria-labelledby="headingFive" data-parent="#accordionExample">
+              <div class="card-body table-responsive">
+                <table class="dtBasicSort table-borderless table mb-0">
+                  <thead class="thead-light">
+                    <tr>
+                      <th class="th-sm">Titre</th>
+                      <th class="th-sm">Saisine</th>
+                      <th class="th-sm">Progression</th>
+                      <th class="th-sm">Statut</th>
+                      <th class="th-sm">Intentée</th>
+                      <th class="th-sm">Terminée</th>
+                      <th class="th-sm">Coût</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <% @case.procedures.each do |process| %>
+                      <tr>
+                        <!--<td><%= process.id %></td>-->
+                        <td><%= process.name %></td>
+                        <td><%= process.jurisdiction.name %></td>
+                        <!--<td>
+                          <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>-->
+                        <% if process.status == 'En attente' %>
+                          <!--<td><span class="badge badge-info"><%= process.status %></span></td>-->
+                          <td>
+                            <div class="progress mt-2">
+                              <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </td>
+                        <% elsif process.status == 'En cours' %>
+                          <!--<td><span class="badge badge-secondary"><%= process.status %></span></td>-->
+                          <td>
+                            <div class="progress mt-2">
+                              <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </td>
+                        <% elsif process.status == 'Perdue' %>
+                          <!--<td><span class="badge badge-success"><%= process.status %></span></td>-->
+                          <td>
+                            <div class="progress mt-2">
+                              <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </td>
+                        <% elsif process.status == 'Gagnée' %>
+                          <!--<td><span class="badge badge-success"><%= process.status %></span></td>-->
+                          <td>
+                            <div class="progress mt-2">
+                              <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </td>
+                        <% elsif process.status == 'Terminée' %>
+                          <!--<td><span class="badge badge-success"><%= process.status %></span></td>-->
+                          <td>
+                            <div class="progress mt-2">
+                              <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </td>
+                        <% elsif process.status == 'Archivée' %>
+                          <!--<td><span class="badge badge-dark"><%= process.status %></span></td>-->
+                          <td>
+                            <div class="progress mt-2">
+                              <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </td>
+                        <% end %>
+                        <% if process.status == 'En attente' %>
+                          <td><span class="badge badge-warning"><%= process.status %></span></td>
+                        <% elsif process.status == 'En cours' %>
+                          <td><span class="badge badge-secondary"><%= process.status %></span></td>
+                        <% elsif process.status == 'Perdue' %>
+                          <td><span class="badge badge-danger"><%= process.status %></span></td>
+                        <% elsif process.status == 'Gagnée' %>
+                          <td><span class="badge badge-success"><%= process.status %></span></td>
+                        <% elsif process.status == 'Terminée' %>
+                          <td><span class="badge badge-primary"><%= process.status %></span></td>
+                        <% elsif process.status == 'Archivée' %>
+                          <td><span class="badge badge-dark">No deal</span></td>
+                        <% end %>
+                        <td><%= process.start_date %></td>
+                        <% if process.end_date.nil? %>
+                          <td>-</td>
+                        <% else %>
+                          <td><%= process.end_date %></td>
+                        <% end %>
+                        <td><%= process.cost %> €</td>
+                      </tr>
+                      <% end %>
+                  </tbody>
+                  <!--<tfoot>
+                    <tr>
+                      <th>Procédure</th>
+                      <th>Saisine</th>
+                      <th>Progression</th>
+                      <th>Statut</th>
+                      <th>Intentée</th>
+                      <th>Terminée</th>
+                      <th>Coût</th>
+                    </tr>
+                  </tfoot>-->
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <!-- Début collapse Pièces du dossier-->
+    <div class="accordion" id="accordionExample">
+      <div class="mt-3">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center" id="headingFour">
+            <h6 class="mt-3">Pièces du dossier
+              <i class="far fa-caret-square-down" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+              </i>
+            </h6>
+          </div>
+          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+            <%= render 'documents', documents: @pieces, category: 'pieces' %>
+          </div>
+        </div>
+      </div>
+      <!-- Fin collapse Pièces du dossier-->
+
+        <div class="mt-3">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center" id="headingOne">
+              <h6 class="mt-3">Correspondances
+                <i class="far fa-caret-square-down" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                </i>
+              </h6>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <%= render 'documents', documents: @letters, category: 'letters' %>
+          </div>
+        </div>
+
+
+        <div class="mt-3">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center" id="headingTwo">
+              <h6 class="mt-3">Conclusions de l'affaire
+                <i class="far fa-caret-square-down" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                </i>
+              </h6>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <%= render 'conclusions', documents: @conclusions, category: 'conclusions' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 mb-5">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center" id="headingThree">
+              <h6 class="mt-3">Conclusions adverses
+                <i class="far fa-caret-square-down" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                </i>
+              </h6>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+              <%= render 'conclusions', documents: @conclusions_opponent, category: 'conclusions_opponent' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    </div>
+  </div>

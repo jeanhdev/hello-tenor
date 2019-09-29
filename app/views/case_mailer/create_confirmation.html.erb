@@ -1,0 +1,23 @@
+
+<p>Cher <%= @case.user.first_name %> <%= @case.user.last_name %>,</p>
+
+<p>Je vous envoie ce mail suite à notre RDV.</p>
+
+<p>Vous trouverez dans ce mail :
+  <ol>- Les informations concernant votre affaire,</ol>
+  <ol>- Les grief de l'affaire,</ol>
+  <ol>- Une estimation du prix de l'affaire.</ol>
+</p>
+
+<h3><%= @case.title %></h3>
+<p>Numé de l'affaire : <%= @case.case_number %></p>
+<p>Dâte du litige : <%= @case.start_date %></p>
+<p>Type de droit : <%= @case.practice_area %></p>
+<p>Grief : <%= @case.description %></p>
+<p>Estimation de facturation :<%= @case.fees %></p>
+
+<p>Je suis disponible si vous avez des questions</p>
+
+<p>Bien à vous,</p>
+
+<p> Maitre <%= @case.lawyer.user.last_name %> </p>

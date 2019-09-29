@@ -1,0 +1,142 @@
+<div class="header-contact inline-right" style="background-color: white">
+  <p>
+    Contacter notre équipe :
+    <a href='tel:+33629486857' target='_blank'>01 00 00 00 00</a>
+  </p>
+
+</div>
+
+<!-- WARNING! NE PAS EFFACER JEAN!!! -->
+
+  <div class="bg-blue">
+    <nav class="navbar navbar-light sticky justify-content-between">
+      <%= link_to root_path do %>
+        <%= image_tag("icon.png", height: "30") %>
+      <% end %>
+      <form class="form-inline">
+        <% if user_signed_in? == false %>
+          <%= link_to "Se connecter", new_user_session_path, class: "nav-link home-menu-item" %>
+        <% else %>
+        <%= link_to "Dashboard", summary_path, class: "btn btn-primary mr-2" %>
+        <!--<%= link_to "Log out", destroy_user_session_path, class: "btn btn-dark" %>-->
+        <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary" %>
+        <% end  %>
+      </form>
+    </nav>
+
+    <div class="container d-flex first-screen justify-content-between">
+      <!-- Assigning a variable case to my sidebar -->
+      <%#= render 'shared/sidebar', case: @case %>
+
+      <div  class="d-flex align-items-center home-banner" style="width: 480px" data-aos="fade-down-right" data-aos-duration="3000" data-aos-once="true">
+        <div>
+          <h1>
+            <strong>La nouvelle façon de gérer votre cabinet d'avocat</strong>
+          </h1>
+          <h4>Réduisez vos coûts administratifs et automatisez le suivi de vos dossiers juridiques avec Hellotenor.</h4>
+          <%= mail_to "contact@hellotenor.com" do %>
+            <button class="btn home-cta" type="button">Demander une démo</button>
+          <% end %>
+        </div>
+      </div>
+      <div data-aos="fade-down-left" data-aos-duration="3000">
+      <%= image_tag("macbook.png", height: "320", class: "mt-4") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-wrapper" style="background-color: white">
+    <div class="container">
+      <section class="features-overview" id="features-section" >
+
+        <div data-aos="fade-up"
+     data-aos-duration="2000" data-aos-once="true" class="content-header" style="text-align: center; padding: 78px 0 48px">
+          <h2>La solution SaaS pour piloter votre cabinet.</h2>
+          <h5 class="section-subtitle text-muted">Un logiciel adapté à tous les cabinets d'avocats pour la gestion des affaires et des clients.</h5>
+        </div>
+      </section>
+      <div class="row align-items-center justify-content-between features-responsive">
+        <div data-aos="fade-up"
+     data-aos-duration="2000" data-aos-once="true" class="col-6 text-justify">
+          <h3>Concentez-vous sur l'essentiel.</h3>
+          <p>Hellotenor vous débarrasse des taches répétitives et sans valeurs ajoutées: classement des dossiers, stockage sécurisé, demande en ligne de pièces, visibilité sur tout votre portefeuille en un coup d’œil. Enfin vous ne manquerez plus aucune échéance grâce notre système de rappels: audience, dépôt de conclusion, expertise, délais de procédure.</p>
+        </div>
+        <%= image_tag("office.png", height: "300")  %>
+      </div>
+      <div class="row align-items-center justify-content-between features-responsive">
+          <%= image_tag("sales-team.png", height: "350")  %>
+          <div data-aos="fade-up"
+     data-aos-duration="2000" data-aos-once="true" class="col-6 text-justify">
+            <h3>Collaborez efficacement avec vos clients.</h3>
+            <p>Hellotenor met à votre disposition une suite d’outils de communication collaboratifs: un chat pour ne jamais perdre le contact, un état précis de l’avancement des procédures pour une relation transparente et sereine, un espace de stockage partagé et sécurisé pour éviter les demandes à répétition et la perte de documents confidentiels.</p>
+          </div>
+      </div>
+      <div class="row align-items-center justify-content-between features-responsive">
+
+          <div data-aos="fade-up"
+     data-aos-duration="2000" data-aos-once="true" class="col-6 text-justify">
+            <h3>Envoyez vos factures d'honoraires en 1 clic.</h3>
+            <p>Hellotenor met à votre disposition un outil de facturation automatisé, s’y ajoute une visibilité en temps réel du statut de vos factures, pour un pilotage du cabinet en toute sécurité.</p>
+          </div>
+          <%= image_tag("boss.png", height: "350")  %>
+      </div>
+
+
+
+      <!-- <section class="digital-marketing-service" id="digital-marketing-section">
+        <div class="row align-items-center">
+          <div class="col-12 col-lg-7 grid-margin grid-margin-lg-0" data-aos="fade-right">
+            <h3 class="m-0">Aucune erreur, aucun retard.</h3>
+            <div class="col-lg-7 col-xl-6 p-0">
+              <p class="py-4 m-0 text-muted">Donnez un souffle nouveau à votre cabinet : toute la gestion de votre équipe et vos procédures juridiques sont désormais automatisées, vous n'avez plus rien à faire !</p>
+            </div>
+          </div>
+          <div class="col-12 col-lg-5 p-0 img-digital grid-margin grid-margin-lg-0" data-aos="fade-left">
+            <%= image_tag("group1.jpg", class: "img-fluid") %>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-12 col-lg-7 text-center flex-item grid-margin" data-aos="fade-right">
+            <%= image_tag("group2.jpg", class: "img-fluid") %>
+          </div>
+          <div class="col-12 col-lg-5 flex-item grid-margin" data-aos="fade-left">
+            <h3 class="m-0">Un outil juridique complet.</h3>
+            <div class="col-lg-9 col-xl-8 p-0">
+              <p class="py-4 m-0 text-muted">Gérez sereinement les dossiers de votre cabinet et de vos clients : congés payés, absences, notes de frais, suivi du temps de travail, préparation de l’arrivée des collaborateurs, Hellotenor s’occupe de tout !</p>
+            </div>
+            <button class="btn btn-info">Readmore</button>
+          </div>
+        </div>
+      </section>
+     <section class="case-studies mt-5" id="case-studies-section">
+      <div class="row grid-margin">
+        <div class="col-12 text-center pb-5">
+          <h2>La sécurité chez Hellotenor</h2>
+          <h5 class="section-subtitle text-muted" style="font-size: 21px; line-height: 31px; font-weight: 300">
+            Chez Hellotenor nous prenons très au sérieux la sécurité de vos données et nous mettons tout en œuvre pour protéger votre cabinet.</h5>
+        </div>
+      </section> -->
+
+      <div class="card card-space col-12 mb-4">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="card-title">Êtes-vous prêt ?</h5>
+              <%= link_to "Par ici pour vous connecter.", new_user_session_path, class: "card-text" %>
+            </div>
+            <%= mail_to "contact@hellotenor.com" do %>
+              <button class="btn home-cta" type="button">Demander une démo</button>
+            <% end %>
+            </div>
+        </div>
+      </div>
+    </div>
+      <footer style="background-color: #F0F1F3">
+        <p class="text-center text-muted pt-4">Copyright © 2019<a href="https://www.hellotenor.eu" class="px-1">Hellotenor.</a>All rights reserved.</p>
+      </footer>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+
+

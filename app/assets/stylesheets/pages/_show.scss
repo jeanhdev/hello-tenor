@@ -1,0 +1,267 @@
+.show{
+  h3{
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  .case-tit {
+    margin-bottom: 0px !important;
+  }
+  // h4{
+  //   text-decoration: underline;
+  // }
+}
+
+.card{
+  border-radius: 5px;
+  box-shadow: 0 .01rem 0.5rem lightgray !important;
+}
+
+.custom-container {
+  flex-grow: 1;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.event-description {
+  position: relative;
+  margin-left: 15px;
+  padding-left: 15px;
+  padding-bottom: 40px;
+  border-left: 2px solid lightgrey;
+}
+
+.brief-details{
+  padding: 10px 50px;
+}
+
+button:focus{
+  outline: none;
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cercle {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border: 1px solid #1A2744;
+  border-radius: 50%;
+  margin-left: -21px;
+  margin-right: 15px;
+}
+// .event-description:before {
+//   content: '';
+//   position: absolute;
+//   left: -22px;
+//   top: 11px;
+//   background: black;
+//   height: 3px;
+//   width: 9px;
+// }
+
+.event-date {
+  position: relative;
+  margin-left: 30px;
+  width: 90px;
+}
+
+
+
+// .event-date:after {
+//   content: '';
+//   position: absolute;
+//   top: 6px;
+//   background: black;
+//   height: 27px;
+//   width: 3px;
+//   left: 95px;
+// }
+
+
+// #pills-home {
+//   overflow: scroll;
+// }
+
+#pills-brief {
+  position: relative;
+}
+
+.sidebar-brief > hr{
+  margin: 15px 40px;
+  margin-bottom: 0 !important;
+  border: 0.7px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.sidebar-brief{
+  position: sticky;
+  top: 0px;
+  background-color: white;
+}
+
+.icon-upload{
+  color: #1A2844;
+  font-size: 25px;
+}
+
+.fa-cloud-download-alt{
+  color: #000000;
+  font-size: 25px;
+}
+
+
+.scrollable-card {
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.timeline-card{
+  width: 60%;
+  // padding: 0 15px;
+}
+
+.progress{
+  border-radius: 3px;
+  height: 8px;
+}
+
+.text-timeline {
+  width: 100%;
+  color: grey;
+  margin-left: 0 !important;
+  h6{
+    color: black;
+  }
+}
+
+.paragraph-timeline{
+  padding: 10px;
+  width: 300px;
+}
+
+.profile-card{
+  width: 40%;
+  // padding: 0 15px;
+}
+
+
+.modal-content{
+  margin-top: -150px;
+}
+
+.button-list .btn {
+  margin-bottom: 12px;
+  margin-left: 8px;
+}
+
+.btn {
+  color: #fff;
+}
+
+.btn-blue {
+  color: #4B81EB;
+  background-color: #fff;
+  border-color: #4B81EB;
+}
+
+.btn-blue:hover {
+  color: #1A2744;
+  border-color: #1A2744;
+}
+
+.edit-btn{
+  color: #4B81EB;
+  background-color: #fff;
+}
+
+.edit-btn:hover{
+  color: #1A2744;
+  border-color: none !important;
+}
+
+.nav-link.nav-link-show.active{
+  color: #1A2744;
+  background-color: white;
+  border-radius: 2px 2px 0 0;
+}
+
+.nav-item-show{
+  width: 130px;
+  padding: 10px 10px 0 20px !important;
+  a {
+    color: white;
+  }
+}
+
+.nav-link-show{
+  border-radius: 2px 2px 0 0;
+}
+
+#pills-tab{
+  background-color: #1A2744;
+  border-radius: 5px 5px 0 0;
+}
+
+.rounded-circle {
+  border: 1px solid #FFFFFF;
+  background-color: #FFFFFF
+}
+
+#headingOne{
+  border: 1px solid #1A2744;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #1A2744;
+  color: white;
+}
+
+#headingTwo{
+  border: 1px solid #1A2744;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #1A2744;
+  color: white;
+}
+
+#headingThree{
+  border: 1px solid #1A2744;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #1A2744;
+  color: white;
+}
+
+#headingFour{
+  border: 1px solid #1A2744;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #1A2744;
+  color: white;
+}
+
+#headingFive{
+  border: 1px solid #1A2744;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #1A2744;
+  color: white;
+}
+
+.business-card {
+  background-image: linear-gradient(180deg, #192744 0%, #385EA5 105%);
+  border-radius: 5px 5px 0 0;
+}
+
+.padding-card {
+  padding: 0px 15px;
+  margin-left: 5%;
+}
+
+.action-center {
+  text-align: center;
+}

@@ -1,0 +1,141 @@
+  <div class="wrapper">
+
+    <%= render 'shared/sidebar' %>
+
+    <div class='container-fluid custom-container'>
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-flex justify-content-between align-items-center">
+
+            <h4 class="page-title mt-5 mb-3">Mes Affaires </h4>
+
+            <div class="text-sm-right">
+              <button type="button" class="btn blue-btn" data-toggle="modal" data-target="#exampleModalScrollable" id="new-case-button">
+              <i class="fas fa-plus mr-1"></i>
+              Nouvelle affaire
+              </button>
+            </div>
+        </div>
+        </div>
+      </div>
+
+      <!--<div data-aos="fade-right"
+      data-aos-duration="2000" class="row">-->
+        <div class="col-xl-12">
+          <div class="card card-cases mb-3">
+            <div class="card-body">
+              <div class="row mb-2">
+                <div class="col-sm-8">
+                </div>
+                <!--<div class="col-sm-4">
+                    <div class="text-sm-right">
+                      <button type="button" class="btn blue-btn" data-toggle="modal" data-target="#exampleModalScrollable" id="new-case-button">
+                      Créer une nouvelle affaire
+                      </button>
+                    </div>
+                </div>-->
+              </div>
+
+              <div>
+                <table class="dtBasicSort table table-striped" width="100%">
+                  <thead>
+                    <tr>
+                      <th scope="col">Références</th>
+                      <th scope="col">Affaires</th>
+                      <th scope="col">Clients</th>
+                      <th scope="col">Statuts</th>
+                      <th scope="col">Dates de création</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @cases.each do |c| %>
+                      <tr>
+                        <td scope="row">
+                          <%= c.case_number %>
+                        </td>
+                        <td><%= link_to c.title, case_path(c) %></td>
+                        <!--<td><%= c.user.first_name %> <%= c.user.last_name %></td>-->
+                        <% if c.user.business  %>
+                          <td><%= c.user.business.name %></td>
+                        <% end %>
+                        <% if c.status == 'En attente' %>
+                          <td><span class="badge badge-info"><%= c.status %></span></td>
+                        <% elsif c.status == 'En cours' %>
+                          <td><span class="badge badge-secondary"><%= c.status %></span></td>
+                        <% elsif c.status == 'Terminé' %>
+                          <td><span class="badge badge-success"><%= c.status %></span></td>
+                        <% elsif c.status == 'Archivé' %>
+                          <td><span class="badge badge-dark"><%= c.status %></span></td>
+                        <% end %>
+                        <td><%= c.created_at.strftime("%d-%m-%Y") %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                <!-- Lorsque 0 résultat -->
+                <div>
+                <%if @cases.size == 0 %>
+                  <p>Aucun résultat disponible<p>
+                <%end%>
+                </div>
+            </div>
+          </div>
+
+
+            <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Créer une nouvelle affaire</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+
+                  <div class="modal-body d-flex justify-content-center">
+                    <div class="form-group">
+                      <%= simple_form_for(@case) do |f| %>
+                        <%= f.error_notification %>
+                        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+                        <div class="form-inputs">
+                          <%= f.input :title, label: "Titre du dossier", required:"true" %>
+                          <%#= f.input :case_number, label: "Numéro de l'affaire" %>
+                          <h6>Informations sur le client : </h6>
+                          <div class="row">
+                            <div class="col-6">
+                              <%= f.input :first_name, label: "Prénom", required:"true" %>
+                            </div>
+                            <div class="col-6">
+                              <%= f.input :last_name, label: "Nom", required:"true" %>
+                            </div>
+                          </div>
+                          <%= f.input :email, label: "Email", required:"true"  %>
+
+                          <h6>Informations sur l'entreprise : </h6>
+                          <%= simple_fields_for :business_infos do |n| %>
+                            <%= n.input :name, label: "Nom de l'entreprise", required:"true"  %>
+                            <%= n.input :address, label: "Adresse", required:"true", input_html: {id: "address"} %>
+                            <%= n.input :phone, label: "Numéro de téléphone", required:"true"  %>
+                          <% end %>
+
+                        </div>
+                        <div class="modal-footer">
+                          <div class="form-actions">
+                            <%= link_to 'Annuler', cases_path, class: "btn  btn-cancel" %>
+                            <%= f.button :submit ,"Valider", class: "btn btn-primary" %>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+      <!--</div>-->
+
+    </div>
+  </div>

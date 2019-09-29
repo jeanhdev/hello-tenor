@@ -1,0 +1,29 @@
+<!-- <div class="container mt-5 col-6 offset-3"> -->
+<div class="container-fluid scroller mt-5" style="margin-left: 0%">
+  <div class="row w-2">
+    <div class="col-lg-6 mx-auto">
+      <div class="auto-form-wrapper pb-5">
+        <div class="mb-5 d-flex justify-content-center">
+          <div style="border-bottom: 3px solid #5782E4; width: max-content;">
+            <h2 class="text-center">Ajouter un document</h2>
+          </div>
+
+        </div>
+
+
+
+        <%= simple_form_for [@case, @document] do |f| %>
+          <%= f.input :name, :label => "Nom" %>
+          <%= f.input :category,:label => "Catégorie", collection: Document::DOC_CATEGORY %>
+          <%= f.input :storage, :label => "Ajout du document" %>
+          <%= f.input :storage_cache, as: :hidden %>
+          <br>
+          <div class="d-flex justify-content-center">
+            <%= f.submit 'Enregistrer votre document', class: 'btn btn-style-blue' %>
+          </div>
+        <% end %>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->

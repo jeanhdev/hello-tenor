@@ -1,0 +1,22 @@
+<div id="documents-<%= category %>" class="card-body table-responsive">
+  <table class="table table-borderless mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Nom</th>
+        <th>Date</th>
+        <th class="action-center">Visualiser</th>
+        <th class="action-center">Supprimer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% documents.each do |doc| %>
+        <tr>
+          <td><%= doc.name %></td>
+          <td><%= doc.created_at.strftime("%d-%m-%Y")%></td>
+          <td class="action-center"><a href="<%= doc.storage_url %>" target="_blank"><%= image_tag("download-icon.svg", width: "20") %></a></td>
+          <td class="action-center"><%= link_to document_path(doc), method: :delete, remote: true, data: {confirm: "Etes vous sur de vouloir supprimer #{doc.name}?"} do%><i class="fas fa-trash"></i><%end%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
